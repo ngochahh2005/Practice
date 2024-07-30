@@ -1,3 +1,3 @@
-https://www.hackerrank.com/dashboard
-https://luyencode.net/problems/
-https://www.spoj.com/PTIT/status/
+https://www.hackerrank.com/dashboard\n
+https://luyencode.net/problems/\n
+https://www.spoj.com/PTIT/status/\n
