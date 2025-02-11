@@ -3,12 +3,12 @@
 #define lmt 60005
 using namespace std;
 
-int a[lmt], n;
-ll bit[lmt];
-vector<int> v;
+int n;
+vector<int> a, v;
+vector<ll> bit;
 
 void update(int idx, int val) {
-    while (idx <= n) {
+    while (idx <= n) {  
         bit[idx] += val;
         idx += idx & -idx;
     }
@@ -24,30 +24,32 @@ ll getSum(int idx) {
 }
 
 int main() {
-    std::ios_base::sync_with_stdio(0);
+    ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
+    
     cin >> n;
+    a.resize(n + 1);
+    bit.assign(n + 1, 0); 
+
     for (int i = 1; i <= n; i++) {
         cin >> a[i];
-        v.emplace_back(a[i]);
+        v.push_back(a[i]);
     }
 
-    //Nen mang
     sort(v.begin(), v.end());
-    v.resize(unique(v.begin(), v.end()) - v.begin()); // xoa moi phan tu trung nhau trong vector v
+    v.erase(unique(v.begin(), v.end()), v.end());
+
     for (int i = 1; i <= n; i++) {
         a[i] = lower_bound(v.begin(), v.end(), a[i]) - v.begin() + 1;
-        // cout << a[i] << " ";
     }
 
-    //Dem so cap nghich the
     ll res = 0;
     for (int i = n; i >= 1; i--) {
         res += getSum(a[i] - 1);
         update(a[i], 1);
     }
-    cout << res;
-}
 
-//https://oj.vnoi.info/problem/nkinv
+    cout << res << "\n";
+    return 0;
+}
